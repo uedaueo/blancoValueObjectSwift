@@ -1,12 +1,12 @@
-*.class
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.ear
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+.svn
+.classpath
+.project
+.idea
+.DS_Store
+*.iml
+/blancoValueObject-*-src.zip
+/tmp
+/blanco/main
+/blanco.php/main
+/bin
+/classes
