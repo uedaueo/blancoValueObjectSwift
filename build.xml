@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="blancoValueObject" default="build" basedir=".">
+<project name="blancoValueObjectSwift" default="build" basedir=".">
 	<!-- blancoAnt(0.2.1)により自動生成されました。 (2010/12/22) -->
 	<property name="version" value="2.0.1" />
 
-	<property name="project" value="blancoValueObject" />
-	<property name="project.lower" value="blancovalueobject" />
+	<property name="project" value="blancoValueObjectSwift" />
+	<property name="project.lower" value="blancovalueobjectswift" />
 	<property name="project.zip" value="${project}-${version}-src.zip" />
-	<property name="project.main.jar" value="blancovalueobject-${version}.jar" />
+	<property name="project.main.jar" value="blancovalueobjectswift-${version}.jar" />
 
 	<property name="encoding" value="UTF-8" />
 	<!-- property name="eclipse.dir" value="C:/Program Files/eclipse" / -->
@@ -49,7 +49,8 @@
 
 	<taskdef name="blancovalueobject" classname="blanco.valueobject.task.BlancoValueObjectTask" classpath="bin:src">
 		<classpath>
-			<fileset dir="lib" includes="*.jar" excludes="blancovalueobject-1.2.4.jar" />
+			<fileset dir="lib" includes="*.jar" />
+			<fileset dir="lib.ant" includes="*.jar" />
 		</classpath>
 	</taskdef>
 
@@ -109,7 +110,7 @@
 	<target name="compile">
 		<delete dir="bin" />
 		<mkdir dir="bin" />
-		<javac destdir="bin" debug="true" source="1.7" target="1.7" fork="false" encoding="${encoding}">
+		<javac destdir="bin" debug="true" source="1.8" target="1.8" fork="false" encoding="${encoding}">
 			<src path="blanco/main/" />
 			<src path="src/" />
 			<classpath>
@@ -149,7 +150,7 @@
 		<blancomessage metadir="meta/program" encoding="${encoding}" />
 		<blancometa2xml metadir="meta/program" encoding="${encoding}" />
 		<blancoresourcebundle metadir="meta/program" commenttimestamp="false" encoding="${encoding}" />
-		<blancovalueobject metadir="meta/program" encoding="${encoding}" sheetType="php"/>
+		<blancovalueobject metadir="meta/object" encoding="${encoding}" />
 
 		<!-- TODO: ここに自身のantタスクを追加してください。 -->
 	</target>
