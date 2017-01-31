@@ -11,21 +11,16 @@ package blanco.valueobject.task;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.xml.transform.TransformerException;
 
 import blanco.cg.BlancoCgSupportedLang;
 import blanco.valueobject.BlancoValueObjectConstants;
 import blanco.valueobject.BlancoValueObjectMeta2Xml;
-import blanco.valueobject.BlancoValueObjectXml2JavaClass;
+import blanco.valueobject.BlancoValueObjectXml2Swift;
 import blanco.valueobject.BlancoValueObjectXmlParser;
 import blanco.valueobject.message.BlancoValueObjectMessage;
 import blanco.valueobject.task.valueobject.BlancoValueObjectProcessInput;
-import blanco.xml.bind.BlancoXmlBindingUtil;
-import blanco.xml.bind.valueobject.BlancoXmlElement;
 
 public class BlancoValueObjectProcessImpl implements BlancoValueObjectProcess {
     /**
@@ -73,11 +68,11 @@ public class BlancoValueObjectProcessImpl implements BlancoValueObjectProcess {
                     continue;
                 }
 
-                final BlancoValueObjectXml2JavaClass xml2JavaClass = new BlancoValueObjectXml2JavaClass();
-                xml2JavaClass.setEncoding(input.getEncoding());
-                xml2JavaClass.setXmlRootElement(input.getXmlrootelement());
-                xml2JavaClass.setSheetLang(new BlancoCgSupportedLang().convertToInt(input.getSheetType()));
-                xml2JavaClass.process(fileMeta2[index], new File(input
+                final BlancoValueObjectXml2Swift xml2SwiftClass = new BlancoValueObjectXml2Swift();
+                xml2SwiftClass.setEncoding(input.getEncoding());
+                xml2SwiftClass.setXmlRootElement(input.getXmlrootelement());
+                xml2SwiftClass.setSheetLang(new BlancoCgSupportedLang().convertToInt(input.getSheetType()));
+                xml2SwiftClass.process(fileMeta2[index], new File(input
                         .getTargetdir()));
 
                 // 単体試験コードの自動生成機能は 0.9.1以降では削除されました。
@@ -90,7 +85,7 @@ public class BlancoValueObjectProcessImpl implements BlancoValueObjectProcess {
                     continue;
                 }
 
-                final BlancoValueObjectXml2JavaClass xml2JavaClass = new BlancoValueObjectXml2JavaClass();
+                final BlancoValueObjectXml2Swift xml2JavaClass = new BlancoValueObjectXml2Swift();
                 xml2JavaClass.setEncoding(input.getEncoding());
                 xml2JavaClass.setXmlRootElement(input.getXmlrootelement());
                 xml2JavaClass.setSheetLang(new BlancoCgSupportedLang().convertToInt(input.getSheetType()));

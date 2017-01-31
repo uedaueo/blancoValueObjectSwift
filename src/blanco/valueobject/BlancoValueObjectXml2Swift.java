@@ -37,7 +37,7 @@ import blanco.valueobject.valueobject.BlancoValueObjectFieldStructure;
  * 
  * @author IGA Tosiki
  */
-public class BlancoValueObjectXml2JavaClass {
+public class BlancoValueObjectXml2Swift {
     /**
      * メッセージ。
      */
@@ -206,7 +206,7 @@ public class BlancoValueObjectXml2JavaClass {
         BlancoBeanUtils.generateCopyToMethod(fCgSourceFile, fCgClass);
 
         // 収集された情報を元に実際のソースコードを自動生成。
-        BlancoCgTransformerFactory.getJavaSourceTransformer().transform(
+        BlancoCgTransformerFactory.getSwiftSourceTransformer().transform(
                 fCgSourceFile, fileBlancoMain);
     }
 
