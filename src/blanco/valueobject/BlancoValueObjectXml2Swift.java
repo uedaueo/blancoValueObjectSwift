@@ -158,11 +158,15 @@ public class BlancoValueObjectXml2Swift {
             fCgClass.getImplementInterfaceList().add(
                     fCgFactory.createType(impl));
         }
+        // superclass, interfaceがなくても、Mappableを実装する
+        // TODO Mappable実装が必要かどうか判別する
+        fCgClass.getImplementInterfaceList().add(
+                fCgFactory.createType("ObjectMapper.Mappable"));
 
         if (fIsXmlRootElement) {
             fCgClass.getAnnotationList().add("XmlRootElement");
-            fCgSourceFile.getImportList().add(
-                    "javax.xml.bind.annotation.XmlRootElement");
+            /*fCgSourceFile.getImportList().add(
+                    "javax.xml.bind.annotation.XmlRootElement");*/
         }
 
         // クラスのJavaDocを設定します。
@@ -203,7 +207,7 @@ public class BlancoValueObjectXml2Swift {
         }
 
         // TODO copyTo メソッドの生成有無を外部フラグ化するかどうか検討すること。
-        BlancoBeanUtils.generateCopyToMethod(fCgSourceFile, fCgClass);
+        //BlancoBeanUtils.generateCopyToMethod(fCgSourceFile, fCgClass);
 
         // 収集された情報を元に実際のソースコードを自動生成。
         BlancoCgTransformerFactory.getSwiftSourceTransformer().transform(
