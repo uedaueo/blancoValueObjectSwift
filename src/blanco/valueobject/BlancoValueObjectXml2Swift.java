@@ -201,6 +201,11 @@ public class BlancoValueObjectXml2Swift {
             buildMethodGet(argClassStructure, fieldStructure);
         }
 
+        // init?メソッドの生成。
+        // TODO Mappable実装が必要かどうか判別する
+        buildMethodInit();
+
+
         // mappingメソッドの生成。
         // TODO Mappable実装が必要かどうか判別する
         buildMethodMapping(argClassStructure);
@@ -491,6 +496,18 @@ public class BlancoValueObjectXml2Swift {
         }
     }
 
+    /**
+     * JSON→SwiftClass変換時に必要なinit?メソッドを生成します。
+     */
+    private void buildMethodInit() {
+        final BlancoCgMethod method = fCgFactory.createMethod("init?",
+                "JSON←→Classに変換する時にObjectMapperが使うメソッド");
+        fCgClass.getMethodList().add(method);
+
+        method.setAccess("required");
+        method.getParameterList().add(
+                fCgFactory.createParameter("map", "ObjectMapper.Map", "Map"));
+    }
 
     /**
      * 調整済みのフィールド名を取得します。
