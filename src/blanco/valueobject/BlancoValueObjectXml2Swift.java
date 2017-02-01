@@ -201,6 +201,10 @@ public class BlancoValueObjectXml2Swift {
             buildMethodGet(argClassStructure, fieldStructure);
         }
 
+        // mappingメソッドの生成。
+        // TODO Mappable実装が必要かどうか判別する
+        buildMethodMapping(argClassStructure);
+
         if (argClassStructure.getGenerateToString()) {
             // toStringメソッドの生成。
             buildMethodToString(argClassStructure);
@@ -456,6 +460,37 @@ public class BlancoValueObjectXml2Swift {
         listLine.add("buf.append(\"]\");");
         listLine.add("return buf.toString();");
     }
+
+    /**
+     * JSON→SwiftClass変換時に必要なmappingメソッドを生成します。
+     *
+     * @param argClassStructure
+     *            クラス情報。
+     */
+    private void buildMethodMapping(
+            final BlancoValueObjectClassStructure argClassStructure) {
+        final BlancoCgMethod method = fCgFactory.createMethod("mapping",
+                "JSON←→Classに変換する時にObjectMapperが使うメソッド");
+        fCgClass.getMethodList().add(method);
+
+        method.getParameterList().add(
+                fCgFactory.createParameter("map", "ObjectMapper.Map", "Map"));
+
+        final List<java.lang.String> listLine = method.getLineList();
+
+        for (int indexField = 0; indexField < argClassStructure.getFieldList()
+                .size(); indexField++) {
+            final BlancoValueObjectFieldStructure field = (BlancoValueObjectFieldStructure) argClassStructure
+                    .getFieldList().get(indexField);
+
+            final String fieldNameAdjustered = (argClassStructure
+                    .getAdjustFieldName() == false ? field.getName()
+                    : BlancoNameAdjuster.toClassName(field.getName()));
+
+            listLine.add("f" + fieldNameAdjustered + " <- map[\"" + fieldNameAdjustered + "\"]");
+        }
+    }
+
 
     /**
      * 調整済みのフィールド名を取得します。
